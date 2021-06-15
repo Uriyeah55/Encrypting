@@ -50,23 +50,23 @@ public class ReptePSP {
         int decisio1;
 
         do {
-            System.out.println("Decisions");
-            System.out.println("0-Sortir");
-            System.out.println("1-Registrar Usuari");
-            System.out.println("2-Accedir");
-            System.out.println("3-Eliminar tots els usuaris");
+            System.out.println("Menu");
+            System.out.println("0-Quit");
+            System.out.println("1-Register new User");
+            System.out.println("2-Log in");
+            System.out.println("3-Delete all users");
 
-            decisio1 = Teclado.leerInt("Decisió?\n");
+            decisio1 = Teclado.leerInt("Choice?\n");
 
             switch (decisio1) {
                 case 0:
-                    System.out.println("Sortint");
+                    System.out.println("Exiting...");
                     break;
                 case 1:
 
                     try {
                         //Registrarse
-                        RegistrarUsuari();
+                        RegisterNewUser();
                         break;
                     } catch (Exception e) {
                         System.out.println("Error");
@@ -82,14 +82,14 @@ public class ReptePSP {
 
                     if (empty) {
 
-                        System.out.println("No hi ha cap usuari registrat. Tornant al meú...");
+                        System.out.println("Currently there are no registed users...");
                     } else {
 
-                        String userTry = Teclado.leerString("usuari:\n");
-                        String contraTry = Teclado.leerString("Contrassenya:\n");
-                        boolean usuariCorrecte = verificarUsuari(userTry, contraTry);
+                        String userTry = Teclado.leerString("Username:\n");
+                        String contraTry = Teclado.leerString("Password:\n");
+                        boolean correctUser = verifyUser(userTry, contraTry);
 
-                        if (usuariCorrecte) {
+                        if (correctUser) {
                             System.out.println("Opcions usuari:");
                             System.out.println("0-Tornar enrere");
                             System.out.println("1-Encriptar arxius");
@@ -142,7 +142,7 @@ public class ReptePSP {
 
     }
 
-    static void RegistrarUsuari() {
+    static void RegisterNewUser() {
 
         String usuari = Teclado.leerString("Introdueix l'usuari:\n");
 
@@ -353,7 +353,7 @@ public class ReptePSP {
 
     }
 
-    static boolean verificarUsuari(String usuariTry, String contrassenyaTry) {
+    static boolean verifyUser(String usuariTry, String contrassenyaTry) {
 
         try {
             FileReader fr = new FileReader(RUTA_ARXIU_USUARIS);
