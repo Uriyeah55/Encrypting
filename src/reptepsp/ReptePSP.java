@@ -144,7 +144,7 @@ public class ReptePSP {
 
     static void RegisterNewUser() {
 
-        String usuari = Teclado.leerString("Introdueix l'usuari:\n");
+        String usuari = Teclado.leerString("Enter the user:\n");
 
         while (usuari.equals("")) {
             System.out.println("Error: missatge buit\n");
@@ -190,7 +190,7 @@ public class ReptePSP {
         String repetirContrassenya = Teclado.leerString("Introdueix-la de nou:\n");
 
         while (repetirContrassenya.equals("")) {
-            System.out.println("Error: missatge buit\n");
+            System.out.println("Error: message can't be empty\n");
 
             repetirContrassenya = Teclado.leerString("Introdueix-la de nou:\n");
 
@@ -210,16 +210,16 @@ public class ReptePSP {
 
             }
 
-            String email = Teclado.leerString("Introdueix el mail:\n");
+            String email = Teclado.leerString("Email:\n");
 
             while (email.equals("")) {
                 System.out.println("Error: missatge buit\n");
-                email = Teclado.leerString("Introdueix el mail:\n");
+                email = Teclado.leerString("Email:\n");
 
             }
             guardarUsuariFitxer(nom, cognoms, usuari, contrassenyaEncriptada, email);
         } else {
-            System.out.println("La contrassenya no ha coincidit. Tornant al menú.\n");
+            System.out.println("Password didn't match. Going back to the menu...\n");
 
         }
 
