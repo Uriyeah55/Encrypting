@@ -47,7 +47,7 @@ public class ReptePSP {
 
         Scanner dadesIntroInt = new Scanner(System.in);
 
-        int decisio1;
+        int choice1;
 
         do {
             System.out.println("Menu");
@@ -56,9 +56,9 @@ public class ReptePSP {
             System.out.println("2-Log in");
             System.out.println("3-Delete all users");
 
-            decisio1 = Teclado.leerInt("Choice?\n");
+            choice1 = Teclado.leerInt("Choice?\n");
 
-            switch (decisio1) {
+            switch (choice1) {
                 case 0:
                     System.out.println("Exiting...");
                     break;
@@ -96,7 +96,7 @@ public class ReptePSP {
                             System.out.println("2-Desencriptar arxius");
                             System.out.println("3-Gestionar dades d'usuari");
 
-                            String userActual = userTry;
+                            String currentUser = userTry;
                             int decisio2 = dadesIntroInt.nextInt();
                             switch (decisio2) {
                                 case 0:
@@ -104,9 +104,9 @@ public class ReptePSP {
                                     break;
                                 case 1:
                                     //encriptar arxiu
-                                    String nomArxiu = Teclado.leerString("Nom de l'arxiu a encriptar:\n");
+                                    String nomArxiu = Teclado.leerString("Name of the file to encrypt:\n");
                                     //enviem false perque obrirem un arxiu NO encriptat
-                                    EncriptarArxiu(nomArxiu);
+                                    EncryptFile(nomArxiu);
 
                                     break;
                                 case 2:
@@ -117,7 +117,7 @@ public class ReptePSP {
                                 case 3:
 
                                     //gestionar dades usuari+eliminem l'usuari i li tornem a demanar les dades sabent ja l'usuari
-                                    RepetirDadesUsuari(userActual);
+                                    RepeatUserInfo(currentUser);
                                     break;
                             }
 
@@ -127,7 +127,7 @@ public class ReptePSP {
 
                     break;
                 case 3:
-                    String confirmacio = Teclado.leerString("Estàs segur? s/n:\n");
+                    String confirmacio = Teclado.leerString("Are you sure? s/n:\n");
                     if (confirmacio.equalsIgnoreCase("s")) {
                         emptyFile();
 
@@ -138,7 +138,7 @@ public class ReptePSP {
                     break;
             }
 
-        } while (decisio1 != 0);
+        } while (choice1 != 0);
 
     }
 
@@ -147,18 +147,18 @@ public class ReptePSP {
         String usuari = Teclado.leerString("Enter the user:\n");
 
         while (usuari.equals("")) {
-            System.out.println("Error: missatge buit\n");
+            System.out.println("Error: message can't be empty\n");
             usuari = Teclado.leerString("Introdueix l'usuari:\n");
 
         }
         //si es true tornem a demanar perque esta repetit
-        boolean comprobarUserRepetit = comprovarExistenciaUsuari(usuari);
+        boolean comprobarUserRepetit = checkUserExistence(usuari);
 
         while (comprobarUserRepetit) {
-            System.out.println("Error: l'usuari ja existeix\n");
+            System.out.println("Error: user exists\n");
             usuari = Teclado.leerString("Introdueix un nou nom d'usuari:\n");
 
-            comprobarUserRepetit = comprovarExistenciaUsuari(usuari);
+            comprobarUserRepetit = checkUserExistence(usuari);
 
         }
 
@@ -225,7 +225,7 @@ public class ReptePSP {
 
     }
 
-    static boolean comprovarExistenciaUsuari(String usuari) {
+    static boolean checkUserExistence(String usuari) {
         //System.out.println("busco el usuari " + usuari);
         try {
             FileReader fr = new FileReader(RUTA_ARXIU_USUARIS);
@@ -263,11 +263,11 @@ public class ReptePSP {
 
     }
 
-    static void EncriptarArxiu(String nomArxiu) {
+    static void EncryptFile(String fileName) {
 
         try {
 
-            File myObj = new File(nomArxiu + ".txt");
+            File myObj = new File(fileName + ".txt");
 
             if (myObj.exists()) {
 
@@ -283,7 +283,7 @@ public class ReptePSP {
 
                 try {
                     String contingutEncriptat = encriptador.encriptar(contingutFitxer, contrassenya);
-                    EscriureFitxer(nomArxiu + ".enc", contingutEncriptat);
+                    EscriureFitxer(fileName + ".enc", contingutEncriptat);
 
                 } catch (Exception e) {
                     System.out.println("Error");
@@ -379,7 +379,7 @@ public class ReptePSP {
         return false;
     }
 
-    static void RepetirDadesUsuari(String usuariActual) {
+    static void RepeatUserInfo(String usuariActual) {
 
         EliminarUsuari(usuariActual);
         //no demanem usuari perque utilitzarem el mateix
