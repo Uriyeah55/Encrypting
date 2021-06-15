@@ -90,6 +90,8 @@ public class ReptePSP {
                         boolean correctUser = verifyUser(userTry, contraTry);
 
                         if (correctUser) {
+                            System.out.println("=============");
+                            System.out.println("Welcome, " + userTry);
                             System.out.println("Opcions usuari:");
                             System.out.println("0-Tornar enrere");
                             System.out.println("1-Encriptar arxius");
@@ -178,7 +180,7 @@ public class ReptePSP {
 
         }
 
-        String contrassenya = Teclado.leerString("Introdueix la contrassenya:\n");
+        String contrassenya = Teclado.leerString("Password:\n");
 
         while (contrassenya.equals("")) {
             System.out.println("Error: missatge buit\n");
