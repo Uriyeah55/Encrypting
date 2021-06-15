@@ -129,7 +129,7 @@ public class ReptePSP {
                 case 3:
                     String confirmacio = Teclado.leerString("Estàs segur? s/n:\n");
                     if (confirmacio.equalsIgnoreCase("s")) {
-                        buidarFitxer();
+                        emptyFile();
 
                     } else {
                         System.out.println("Tornant al menú...");
@@ -250,7 +250,7 @@ public class ReptePSP {
         return false;
     }
 
-    static void buidarFitxer() {
+    static void emptyFile() {
 //buida les dades de usuaris
         try {
             PrintWriter pw = new PrintWriter(RUTA_ARXIU_USUARIS);
